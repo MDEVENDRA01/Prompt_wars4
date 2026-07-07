@@ -3,6 +3,7 @@
 
 import { useEffect, useState } from "react";
 import io from "socket.io-client";
+import { API_URL } from "../config";
 import { 
   ShieldAlert, Activity, AlertTriangle, Send, Loader2, BarChart3, 
   Map, MessageSquare, AlertCircle, RefreshCw, Printer, Award, Sparkles, Bus
@@ -37,7 +38,7 @@ export default function AdminCommandCenter() {
   const [isGeneratingReport, setIsGeneratingReport] = useState(false);
 
   useEffect(() => {
-    const socket = io("http://localhost:3001");
+    const socket = io(API_URL);
 
     socket.on("initial_state", (data) => {
       setZones(data.zones);
@@ -81,7 +82,7 @@ export default function AdminCommandCenter() {
   const handleRefreshBriefing = async () => {
     setIsBriefingLoading(true);
     try {
-      const res = await fetch("http://localhost:3001/api/ai/briefing");
+      const res = await fetch(`${API_URL}/api/ai/briefing`);
       const data = await res.json();
       setBriefing(data.response);
     } catch (err) {
@@ -99,7 +100,7 @@ export default function AdminCommandCenter() {
     setIsDecisionLoading(true);
     setCustomScenario(query);
     try {
-      const res = await fetch("http://localhost:3001/api/ai/decision", {
+      const res = await fetch(`${API_URL}/api/ai/decision`, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ scenario: query }),
@@ -120,7 +121,7 @@ export default function AdminCommandCenter() {
 
     setIsBroadcasting(true);
     try {
-      const res = await fetch("http://localhost:3001/api/alerts", {
+      const res = await fetch(`${API_URL}/api/alerts`, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({

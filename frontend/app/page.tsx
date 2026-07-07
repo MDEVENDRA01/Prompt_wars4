@@ -5,6 +5,7 @@ import Link from "next/link";
 import { useEffect, useState } from "react";
 import { Users, ShieldAlert, Cpu, Activity, Globe, Compass } from "lucide-react";
 import io from "socket.io-client";
+import { API_URL } from "./config";
 
 export default function Home() {
   const [backendStatus, setBackendStatus] = useState<"connecting" | "online" | "offline">("connecting");
@@ -17,7 +18,7 @@ export default function Home() {
 
   useEffect(() => {
     // Try to connect to backend Socket.io
-    const socket = io("http://localhost:3001");
+    const socket = io(API_URL);
 
     socket.on("connect", () => {
       setBackendStatus("online");

@@ -3,6 +3,7 @@
 
 import { useEffect, useState } from "react";
 import io from "socket.io-client";
+import { API_URL } from "../config";
 import { 
   Users, ShieldAlert, AlertTriangle, FileSpreadsheet, 
   MapPin, CheckCircle, Clock, Check, Languages, Send, Loader2 
@@ -30,7 +31,7 @@ export default function VolunteerPortal() {
   const [isTranslating, setIsTranslating] = useState(false);
 
   useEffect(() => {
-    const socket = io("http://localhost:3001");
+    const socket = io(API_URL);
 
     socket.on("initial_state", (data) => {
       setIncidents(data.incidents);
@@ -60,7 +61,7 @@ export default function VolunteerPortal() {
 
     setIsSubmitting(true);
     try {
-      const res = await fetch("http://localhost:3001/api/incidents", {
+      const res = await fetch(`${API_URL}/api/incidents`, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({
@@ -85,7 +86,7 @@ export default function VolunteerPortal() {
   // Patch Status
   const handleUpdateStatus = async (id: string, newStatus: "in_progress" | "resolved") => {
     try {
-      await fetch(`http://localhost:3001/api/incidents/${id}`, {
+      await fetch(`${API_URL}/api/incidents/${id}`, {
         method: "PATCH",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ status: newStatus }),
@@ -102,7 +103,7 @@ export default function VolunteerPortal() {
 
     setIsTranslating(true);
     try {
-      const res = await fetch("http://localhost:3001/api/ai/translate", {
+      const res = await fetch(`${API_URL}/api/ai/translate`, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ text: translateInput, targetLanguage: targetLang }),

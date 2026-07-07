@@ -3,6 +3,7 @@
 
 import { useEffect, useState, useRef } from "react";
 import io from "socket.io-client";
+import { API_URL } from "../config";
 import { 
   Compass, MapPin, Bus, Navigation, Globe, Trash2, Award, 
   Accessibility, MessageSquare, AlertTriangle, Send, Loader2 
@@ -39,7 +40,7 @@ export default function FanPortal() {
   }, [chatHistory]);
 
   useEffect(() => {
-    const socket = io("http://localhost:3001");
+    const socket = io(API_URL);
 
     socket.on("initial_state", (data) => {
       setZones(data.zones);
@@ -99,7 +100,7 @@ export default function FanPortal() {
       if (chatTab === "accessibility") endpoint = "/api/ai/accessibility";
       else if (chatTab === "transport") endpoint = "/api/ai/transport";
 
-      const res = await fetch(`http://localhost:3001${endpoint}`, {
+      const res = await fetch(`${API_URL}${endpoint}`, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ message: userText, language }),
@@ -127,7 +128,7 @@ export default function FanPortal() {
   // Log Recycle Action
   const handleRecycle = async () => {
     try {
-      const res = await fetch("http://localhost:3001/api/sustainability/recycle", {
+      const res = await fetch(`${API_URL}/api/sustainability/recycle`, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ amount: 5 }),
