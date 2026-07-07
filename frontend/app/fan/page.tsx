@@ -3,6 +3,7 @@
 
 import { useEffect, useState, useRef } from "react";
 import io from "socket.io-client";
+import Link from "next/link";
 import { API_URL } from "../config";
 import { 
   Compass, MapPin, Bus, Navigation, Globe, Trash2, Award, 
@@ -179,9 +180,9 @@ export default function FanPortal() {
               <option className="text-slate-800" value="Hindi">हिन्दी</option>
             </select>
           </div>
-          <a href="/" className="text-xs text-slate-300 hover:text-white transition-colors">
+          <Link href="/" className="text-xs text-slate-300 hover:text-white transition-colors">
             Exit Dashboard
-          </a>
+          </Link>
         </div>
       </header>
 

@@ -3,6 +3,7 @@
 
 import { useEffect, useState } from "react";
 import io from "socket.io-client";
+import Link from "next/link";
 import { API_URL } from "../config";
 import { 
   Users, ShieldAlert, AlertTriangle, FileSpreadsheet, 
@@ -166,9 +167,9 @@ export default function VolunteerPortal() {
               <option className="text-slate-800" value="Carlos Ramos">Carlos Ramos</option>
             </select>
           </div>
-          <a href="/" className="text-xs text-slate-300 hover:text-white transition-colors">
+          <Link href="/" className="text-xs text-slate-300 hover:text-white transition-colors">
             Exit Dashboard
-          </a>
+          </Link>
         </div>
       </header>
 

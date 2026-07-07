@@ -3,6 +3,7 @@
 
 import { useEffect, useState } from "react";
 import io from "socket.io-client";
+import Link from "next/link";
 import { API_URL } from "../config";
 import { 
   ShieldAlert, Activity, AlertTriangle, Send, Loader2, BarChart3, 
@@ -228,9 +229,9 @@ export default function AdminCommandCenter() {
             {isGeneratingReport ? <Loader2 className="h-3.5 w-3.5 animate-spin" /> : <Printer className="h-3.5 w-3.5" />}
             Compile Post-Match Report
           </button>
-          <a href="/" className="text-xs text-slate-300 hover:text-white transition-colors ml-2">
+          <Link href="/" className="text-xs text-slate-300 hover:text-white transition-colors ml-2">
             Exit Dashboard
-          </a>
+          </Link>
         </div>
       </header>
 
