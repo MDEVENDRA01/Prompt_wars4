@@ -121,6 +121,7 @@ export default function FanPortal() {
 
   // Quick Chat trigger when clicking a zone
   const handleZoneClick = (zone: any) => {
+    if (!zone || !zone.id) return;
     setSelectedZone(zone);
     const capacityPercent = Math.round((zone.current_count / zone.capacity) * 100);
     setChatInput(`Where is ${zone.name} and how busy is it?`);
@@ -337,7 +338,7 @@ export default function FanPortal() {
           </div>
 
           {/* Selected Zone Detail Panel */}
-          {selectedZone && (
+          {selectedZone && selectedZone.id && (
             <div className="bg-white border border-slate-200 rounded-2xl p-5 shadow-sm animate-slide-up flex flex-col md:flex-row justify-between items-start md:items-center gap-4">
               <div>
                 <h4 className="font-bold text-[#0F2C4C] text-md">{selectedZone.name}</h4>
