@@ -1,0 +1,136 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --background: #F7F9FB;
+  --foreground: #0F2C4C;
+  --primary: #0F2C4C;
+  --accent: #FFC107;
+  --secondary: #00A651;
+  --alert: #E63946;
+}
+
+body {
+  color: var(--foreground);
+  background: var(--background);
+  font-family: 'Inter', system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+  overflow-x: hidden;
+}
+
+/* Glassmorphism Styles */
+.glass-panel {
+  background: rgba(255, 255, 255, 0.7);
+  backdrop-filter: blur(12px);
+  border: 1px solid rgba(255, 255, 255, 0.3);
+  box-shadow: 0 8px 32px 0 rgba(15, 44, 76, 0.05);
+}
+
+.glass-panel-dark {
+  background: rgba(15, 44, 76, 0.85);
+  backdrop-filter: blur(12px);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.2);
+}
+
+/* Pulse Animations for Heatmap Zone Statuses */
+@keyframes zone-pulse-red {
+  0%, 100% {
+    fill: rgba(230, 57, 70, 0.85);
+    filter: drop-shadow(0 0 2px rgba(230, 57, 70, 0.6));
+  }
+  50% {
+    fill: rgba(230, 57, 70, 0.5);
+    filter: drop-shadow(0 0 10px rgba(230, 57, 70, 0.9));
+  }
+}
+
+@keyframes zone-pulse-amber {
+  0%, 100% {
+    fill: rgba(255, 193, 7, 0.85);
+    filter: drop-shadow(0 0 2px rgba(255, 193, 7, 0.6));
+  }
+  50% {
+    fill: rgba(255, 193, 7, 0.5);
+    filter: drop-shadow(0 0 8px rgba(255, 193, 7, 0.8));
+  }
+}
+
+.zone-critical {
+  animation: zone-pulse-red 3s infinite ease-in-out;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.zone-warning {
+  animation: zone-pulse-amber 3s infinite ease-in-out;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.zone-normal {
+  fill: rgba(0, 166, 81, 0.7);
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.zone-normal:hover {
+  fill: rgba(0, 166, 81, 0.95);
+  filter: drop-shadow(0 0 8px rgba(0, 166, 81, 0.6));
+}
+
+.zone-critical:hover {
+  animation-play-state: paused;
+  fill: rgba(230, 57, 70, 1);
+  filter: drop-shadow(0 0 12px rgba(230, 57, 70, 0.95));
+}
+
+.zone-warning:hover {
+  animation-play-state: paused;
+  fill: rgba(255, 193, 7, 1);
+  filter: drop-shadow(0 0 10px rgba(255, 193, 7, 0.95));
+}
+
+/* Custom Scrollbar for dashboards */
+::-webkit-scrollbar {
+  width: 6px;
+  height: 6px;
+}
+
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+::-webkit-scrollbar-thumb {
+  background: rgba(15, 44, 76, 0.2);
+  border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: rgba(15, 44, 76, 0.4);
+}
+
+/* Slide up animation for new items */
+@keyframes slide-up {
+  from {
+    opacity: 0;
+    transform: translateY(12px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.animate-slide-up {
+  animation: slide-up 0.4s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
+
+/* Glow effects */
+.glow-accent {
+  box-shadow: 0 0 15px rgba(255, 193, 7, 0.3);
+}
+
+.glow-secondary {
+  box-shadow: 0 0 15px rgba(0, 166, 81, 0.3);
+}
